@@ -13,13 +13,12 @@
 <title>商品一覧</title>
 
 </head>
-<body>
-    
-        
+<body>  
     <a href="/recipes">全商品</a>
-        <a th:each="c:${categories}" th:href="@{/items(categoryId=${c.id})}">
-            <span th:text="${c.name}" style="padding-left: 10px;"></span>
-        </a>
+    <a th:each="category:${categories}"
+       th:href="@{/recipes(categoryId=${category.id})}"
+       th:text="${category.name}"
+    ></a>"
    
     <form action="/recipes" method="get">
         <input type="text" name="keyword" placeholder="キーワード">

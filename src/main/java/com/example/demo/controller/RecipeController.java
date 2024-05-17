@@ -29,13 +29,16 @@ public class RecipeController {
 			@RequestParam(name="keyword", defaultValue="")String keyword,
 			Model model) {
 		List<Category> categoryList=categoryRepository.findAll();
-		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("categories",categoryList);
 		
 		List<Recipe> recipeList=null;
-		if(categoryId==null) {
-			recipeList=recipeRepository.findAll();
-		}else {
+		
+		if(categoryId!=null) {
 			recipeList=recipeRepository.findByCategoryId(categoryId);
+		}else if(keyword.length()>0){
+			recipeList=recipeRepository.findByNameContaining(keyword);
+		}else {
+			recipeList=recipeRepository.findAll();
 		}
 		model.addAttribute("recipes",recipeList);
 		return "recipes";
@@ -67,6 +70,8 @@ public class RecipeController {
 	public String edit(
 			@PathVariable("id")Integer id,
 			Model model) {
+		List<Category> categoryList=categoryRepository.findAll();
+		model.addAttribute("categories",categoryList);
 		Recipe recipe=recipeRepository.findById(id).get();
 		model.addAttribute("recipe",recipe);
 		return "editRecipes";
