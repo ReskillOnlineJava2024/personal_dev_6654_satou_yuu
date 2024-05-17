@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Recipe;
+import com.example.demo.model.Account;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.RecipeRepository;
 
@@ -22,6 +23,9 @@ public class RecipeController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
+	@Autowired
+	Account account;
+	
 	//レシピ一覧の表示
 	@GetMapping("/recipes")
 	public String index(
@@ -30,7 +34,7 @@ public class RecipeController {
 			Model model) {
 		List<Category> categoryList=categoryRepository.findAll();
 		model.addAttribute("categories",categoryList);
-		
+		model.addAttribute("name",account.getName());
 		List<Recipe> recipeList=null;
 		
 		if(categoryId!=null) {
@@ -45,22 +49,22 @@ public class RecipeController {
 	}
 	
 	//新規作成
-	@GetMapping("/recipes/new")
-	public String create() {
+	@GetMapping("/recipes/add")
+	public String add() {
 		return "createRecipe";
 	}
 	
 	//作製したレシピの送信
 	@PostMapping("/recipes/add")
-	public String add(
+	public String create(
 			@RequestParam(name="categoryId", defaultValue="")Integer categoryId,
 			@RequestParam(name="name", defaultValue="")String name,
 			@RequestParam(name="material", defaultValue="")String material,
 			@RequestParam(name="content", defaultValue="")String content,
 			Model model
 			) {
-		Integer userId=1;
-		Recipe recipe=new Recipe(categoryId,userId,name,material,content);
+		
+		Recipe recipe=new Recipe(categoryId,account.getId(),name,material,content);
 		recipeRepository.save(recipe);
 		return "redirect:/recipes";
 	}
@@ -86,8 +90,7 @@ public class RecipeController {
 			@RequestParam(name="material", defaultValue="")String material,
 			@RequestParam(name="content", defaultValue="")String content,
 			Model model) {
-		Integer userId=1;
-		Recipe recipe=new Recipe(id,categoryId,userId,name,material,content);
+		Recipe recipe=new Recipe(id,categoryId,account.getId(),name,material,content);
 		recipeRepository.save(recipe);
 		
 		return "redirect:/recipes";
@@ -100,6 +103,17 @@ public class RecipeController {
 			Model model) {
 		recipeRepository.deleteById(id);
 		return "redirect:/recipes";
+	}
+	
+	//詳細の表示
+	@GetMapping("/recipe/detail/{id}")
+	public String detail(
+			@PathVariable("id") Integer id,
+			Model model) {
+		Recipe recipe=recipeRepository.findById(id).orElse(null);
+		model.addAttribute("recipe",recipe);
+		
+		return "showRecipe";
 	}
 
 }

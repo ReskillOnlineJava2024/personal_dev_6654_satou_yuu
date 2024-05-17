@@ -3,22 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <h1>今日の献立</h1>
-    <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>商品一覧</title>
-
-</head>
-<body>  
+    <h1>今日の献立</h1> 
+    <p>こんにちは[[${name}]]さん</p>
     <a href="/recipes">全商品</a>
     <a th:each="category:${categories}"
        th:href="@{/recipes(categoryId=${category.id})}"
        th:text="${category.name}"
-    ></a>"
+    ></a>
    
     <form action="/recipes" method="get">
         <input type="text" name="keyword" placeholder="キーワード">
@@ -34,7 +28,9 @@
         </tr>
         <tr th:each="recipe:${recipes}">
             <td th:text="${recipe.id}"></td>
-            <td th:text="${recipe.name}"></td>
+            <td>
+                <a th:href="@{/recipe/detail/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a>
+            </td>
             <td th:text="${recipe.material}"></td>
             <td>
                 <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="get">
@@ -48,7 +44,7 @@
             </td>
         </tr>
     </table>
-    <a href="/recipes/new">新規レシピ作成</a>
+    <a href="/recipes/add">新規レシピ作成</a>
 
 </body>
 </html>

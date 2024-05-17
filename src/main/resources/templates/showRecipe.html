@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <table border="1">
+       <tr>
+           <th>料理名</th>
+           <td>[[${recipe.name}]]</td>
+       </tr>
+       <tr>
+           <th>材料</th>
+           <td>[[${recipe.material}]]</td>
+       </tr>
+       <tr>
+           <th>作り方</th>
+           <td>[[${recipe.contents}]]</td>
+       </tr>
+    </table>
+    <a href="/recipes">戻る</a>
+
+</body>
+</html>
