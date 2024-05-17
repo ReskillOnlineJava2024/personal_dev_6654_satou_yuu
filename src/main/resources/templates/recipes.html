@@ -8,11 +8,16 @@
 <body>
     <h1>今日の献立</h1> 
     <p>こんにちは[[${name}]]さん</p>
-    <a href="/recipes">全商品</a>
-    <a th:each="category:${categories}"
-       th:href="@{/recipes(categoryId=${category.id})}"
-       th:text="${category.name}"
-    ></a>
+    <form action="/recipes" method="get">
+        <select size="1" name="categoryId">
+            <option value="">全レシピ</option>
+            <option value="1">和食</option>
+            <option value="2">洋食</option>
+            <option value="3">中華</option>
+            <option value="4">その他</option>
+        </select>
+        <button>検索</button>
+    </form>
    
     <form action="/recipes" method="get">
         <input type="text" name="keyword" placeholder="キーワード">
