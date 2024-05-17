@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>今日の献立</h1>
+    <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>商品一覧</title>
+
+</head>
+<body>
+    
+        
+    <a href="/recipes">全商品</a>
+        <a th:each="c:${categories}" th:href="@{/items(categoryId=${c.id})}">
+            <span th:text="${c.name}" style="padding-left: 10px;"></span>
+        </a>
+   
+    <form action="/recipes" method="get">
+        <input type="text" name="keyword" placeholder="キーワード">
+        <button>検索</button>
+    </form>
+    <table border="1">
+        <tr>
+            <th>NO</th>
+            <th>料理名</th>
+            <th>材料</th>
+            <th>編集</th>
+            <th>削除</th>
+        </tr>
+        <tr th:each="recipe:${recipes}">
+            <td th:text="${recipe.id}"></td>
+            <td th:text="${recipe.name}"></td>
+            <td th:text="${recipe.material}"></td>
+            <td>
+                <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="get">
+                    <button href="/add">更新</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/recipes/{id}/delete(id=${recipe.id})}" method="post">
+                    <button>削除</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <a href="/recipes/new">新規レシピ作成</a>
+
+</body>
+</html>

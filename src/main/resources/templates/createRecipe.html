@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h2>新規レシピ作成</h2>
+   
+     <form action="/recipes/add" method="post">
+          <table border="1">
+            <tr>
+                <th>カテゴリー</th>
+                <td>
+                    <input type="radio" value="1">和食 
+                    <input type="radio" value="2">洋食 
+                    <input type="radio" value="3">中華
+                    <input type="radio" value="4">その他
+                </td>
+            </tr>
+            <tr>
+                <th>料理名</th>
+                <td>
+                    <input type="text" name="name">
+                </td>
+            </tr>
+            <tr>
+                <th>材料</th>
+                <td>
+                    <input type="text" name="material">
+                </td>
+            </tr>
+            <tr>
+                <th>作り方</th>
+                <td>
+                    <textarea name="content"></textarea>
+                </td>
+            </tr>
+            </table>
+            <button>追加</button>
+         </form>
+</body>
+</html>
