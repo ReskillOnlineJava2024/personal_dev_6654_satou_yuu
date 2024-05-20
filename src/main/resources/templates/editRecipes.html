@@ -6,17 +6,23 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+    <header th:replace="header"></header>
     <h2>新規レシピ作成</h2>
    
      <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="post">
           <table border="1">
             <tr>
                 <th>カテゴリー</th>
-                <td>
-                    <input type="radio" value="1" th:checked="${recipe.categoryId==1}">和食 
-                    <input type="radio" value="2" th:checked="${recipe.categoryId==2}">洋食 
-                    <input type="radio" value="3" th:checked="${recipe.categoryId==3}">中華
-                    <input type="radio" value="4" th:checked="${recipe.categoryId==4}">その他
+                <td>                    
+                    <select size="1" name="categoryId">
+                         <option value="1" th:checked="${recipe.categoryId==1}">和食</option>
+                         <option value="2" th:checked="${recipe.categoryId==2}">洋食</option>
+                         <option value="3" th:checked="${recipe.categoryId==3}">中華</option>
+                         <option value="4" th:checked="${recipe.categoryId==4}">イタリアン</option>
+                         <option value="5" th:checked="${recipe.categoryId==5}">ドリンク</option>
+                         <option value="6" th:checked="${recipe.categoryId==6}">デザート、菓子</option>
+                         <option value="7" th:checked="${recipe.categoryId==7}">その他</option>
+                      </select>
                 </td>
             </tr>
             <tr>

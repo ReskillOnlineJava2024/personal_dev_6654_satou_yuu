@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Recipe;
+import com.example.demo.entity.Review;
 import com.example.demo.model.Account;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.RecipeRepository;
-
+import com.example.demo.repository.ReviewRepository;
+import com.example.demo.repository.UserRepository;
 @Controller
 public class RecipeController {
 	@Autowired
@@ -22,6 +24,11 @@ public class RecipeController {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	ReviewRepository reviewRepository;
 	
 	@Autowired
 	Account account;
@@ -48,6 +55,19 @@ public class RecipeController {
 		return "recipes";
 	}
 	
+	//コメントの送信
+	@PostMapping("/recipe/comment")
+	public String comment(
+			@RequestParam(name="id", defaultValue="") Integer id,
+			@RequestParam(name="name", defaultValue="")String name,
+			@RequestParam(name="comment", defaultValue="")String comment,
+			Model model) {
+		
+		Review review=new Review(id,name,comment);
+		reviewRepository.save(review);
+		return "redirect:/recipes";
+	}
+	
 	//新規作成
 	@GetMapping("/recipes/add")
 	public String add() {
@@ -63,10 +83,38 @@ public class RecipeController {
 			@RequestParam(name="content", defaultValue="")String content,
 			Model model
 			) {
+		String error1="";
+		String error2="";
+		String error3="";
+		boolean check=true;
 		
-		Recipe recipe=new Recipe(categoryId,account.getId(),name,material,content);
-		recipeRepository.save(recipe);
-		return "redirect:/recipes";
+		Recipe recipe=new Recipe(categoryId,account.getName(),name,material,content);
+		
+		if(name.length()==0) {
+			error1="料理名を入力して下さい";
+			check=false;
+		}
+		if(material.length()==0) {
+			error2="材料を入力して下さい";
+			check=false;
+		}
+		if(content.length()==0) {
+			error3="作り方を入力して下さい";
+			check=false;
+		}
+		
+		if(check==false) {
+			model.addAttribute("error1",error1);
+			model.addAttribute("error2",error2);
+			model.addAttribute("error3",error3);
+			return "createRecipe";
+		}else {
+			recipeRepository.save(recipe);
+			return "redirect:/recipes";
+		}
+		
+		
+		
 	}
 	
 	//編集
@@ -90,7 +138,7 @@ public class RecipeController {
 			@RequestParam(name="material", defaultValue="")String material,
 			@RequestParam(name="content", defaultValue="")String content,
 			Model model) {
-		Recipe recipe=new Recipe(id,categoryId,account.getId(),name,material,content);
+		Recipe recipe=new Recipe(id,categoryId,account.getName(),name,material,content);
 		recipeRepository.save(recipe);
 		
 		return "redirect:/recipes";
@@ -111,9 +159,13 @@ public class RecipeController {
 			@PathVariable("id") Integer id,
 			Model model) {
 		Recipe recipe=recipeRepository.findById(id).orElse(null);
+		List<Review> reviews=reviewRepository.findByRecipeId(id);
 		model.addAttribute("recipe",recipe);
+		model.addAttribute("reviews",reviews);
 		
 		return "showRecipe";
 	}
+	
+	
 
 }

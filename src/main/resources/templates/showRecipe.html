@@ -6,10 +6,33 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+    <header th:replace="header"></header>
+    <hr>
     <table border="1">
+        <tr>
+            <th> </th>
+            <th> </th>
+        </tr>
        <tr>
            <th>料理名</th>
            <td>[[${recipe.name}]]</td>
+       </tr>
+       <tr>
+           <th>作成者</th>
+           <td>[[${recipe.userName}]]</td>
+       </tr>
+       <tr>
+           <th>カテゴリ</th>
+           <td>
+               <p th:text="和食"th:if="${recipe.categoryId==1}"></p>
+               <p th:text="洋食"th:if="${recipe.categoryId==2}"></p>
+               <p th:text="中華"th:if="${recipe.categoryId==3}"></p>
+               <p th:text="イタリアン"th:if="${recipe.categoryId==4}"></p>
+               <p th:text="ドリンク"th:if="${recipe.categoryId==5}"></p>
+               <p th:text="デザート、菓子"th:if="${recipe.categoryId==6}"></p>
+               <p th:text="その他"th:if="${recipe.categoryId==7}"></p>
+               
+           </td>
        </tr>
        <tr>
            <th>材料</th>
@@ -20,7 +43,20 @@
            <td>[[${recipe.contents}]]</td>
        </tr>
     </table>
-    <a href="/recipes">戻る</a>
+   
+   <table>
+       <tr>
+           <th>名前</th>
+           <th>コメント</th>
+       </tr>
+       <tr th:each="review:${reviews}">
+           <td th:text="${review.name}"></td>
+           <td th:text="${review.comments}"></td>
+       </tr>
+   </table>
+    
+    <hr>
+    <footer th:replace="fooder"></footer>
 
 </body>
 </html>

@@ -14,8 +14,13 @@ public class Category {
 	private Integer id; // カテゴリーID
 	
 	@Column(name="category_name")
-
 	private String name; // カテゴリー名
+	
+	public Category() {}
+	
+	public Category(String name) {
+		
+	}
 
 	public Integer getId() {
 		return id;

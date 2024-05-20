@@ -24,7 +24,7 @@ public class UserController {
 	HttpSession session;
 	
 	//ログインの表示
-	@GetMapping("/login")
+	@GetMapping({"/login","/logout"})
 	public String index() {
 		return "login";
 	}
@@ -61,7 +61,7 @@ public class UserController {
 	}
 	
 	//新規登録処理
-	@PostMapping("login/add")
+	@PostMapping("login/created")
 	public String create(
 			@RequestParam(name="name",defaultValue="")String name,
 			@RequestParam(name="password",defaultValue="")String password,
@@ -70,7 +70,7 @@ public class UserController {
 		User user=new User(name,password);
 		userRepository.save(user);
 		model.addAttribute("message","登録しました");
-		return "redirect:/login";
+		return "confirm";
 	}
 	
 

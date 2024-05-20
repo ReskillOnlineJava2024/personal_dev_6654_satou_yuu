@@ -25,6 +25,9 @@ header h1 {
 hr {
     border-top: 2px dashed #7d8bae;
 }
+td{
+ background-color:#ffffff;  
+}
 /* メイン */
 main {
     background-color: #FFFFFF;
@@ -39,7 +42,7 @@ table, th, td {
 /* 表 */
 table {
     margin: 5px auto;
-    min-width: 800px;
+    min-width: 1000px;
 }
 /* 表見出しセル */
 table th {
@@ -50,15 +53,16 @@ table th {
 button {
     margin: 2px;
     padding: 5px 20px;
-    background-color: #e5857b;
+    background-color: rgb(0, 0, 255);
     color: #ffffff;
     border: none;
     width:150px;
     cursor: pointer;
+    box-shadow:#666666;
 }
 /* 送信ボタン(マウスオーバー時) */
 button:hover {
-    background-color: #f1b2b2;
+    background-color: #6666ff;
 }
 /* エラーメッセージ */
 ul.error {

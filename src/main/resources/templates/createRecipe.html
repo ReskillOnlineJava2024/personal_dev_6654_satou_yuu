@@ -7,16 +7,24 @@
 </head>
 <body>
     <h2>新規レシピ作成</h2>
+    [[${error1}]]<br>
+    [[${error2}]]<br>
+    [[${error3}]]<br>
    
      <form action="/recipes/add" method="post">
           <table border="1">
             <tr>
                 <th>カテゴリー</th>
                 <td>
-                    <input type="radio" value="1">和食 
-                    <input type="radio" value="2">洋食 
-                    <input type="radio" value="3">中華
-                    <input type="radio" value="4">その他
+                    <select size="1" name="categoryId">
+                        <option value="1">和食</option>
+                        <option value="2">洋食</option>
+                        <option value="3">中華</option>
+                        <option value="4">イタリアン</option>
+                        <option value="5">ドリンク</option>
+                        <option value="6">デザート、菓子</option>
+                        <option value="7">その他</option>
+                     </select>
                 </td>
             </tr>
             <tr>

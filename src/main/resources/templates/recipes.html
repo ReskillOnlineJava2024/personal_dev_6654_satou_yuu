@@ -6,7 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <h1>今日の献立</h1> 
+    <header th:replace="header"></header>
+    <hr>
     <p>こんにちは[[${name}]]さん</p>
     <form action="/recipes" method="get">
         <select size="1" name="categoryId">
@@ -14,7 +15,10 @@
             <option value="1">和食</option>
             <option value="2">洋食</option>
             <option value="3">中華</option>
-            <option value="4">その他</option>
+            <option value="4">イタリアン</option>
+            <option value="5">ドリンク</option>
+            <option value="6">デザート、菓子</option>
+            <option value="7">その他</option>
         </select>
         <button>検索</button>
     </form>
@@ -27,7 +31,7 @@
         <tr>
             <th>NO</th>
             <th>料理名</th>
-            <th>材料</th>
+            <th>作成者</th>
             <th>編集</th>
             <th>削除</th>
         </tr>
@@ -36,20 +40,55 @@
             <td>
                 <a th:href="@{/recipe/detail/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a>
             </td>
-            <td th:text="${recipe.material}"></td>
+            <td th:text="${recipe.userName}"></td>
             <td>
                 <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="get">
                     <button href="/add">更新</button>
                 </form>
             </td>
             <td>
-                <form th:action="@{/recipes/{id}/delete(id=${recipe.id})}" method="post">
+                <form th:action="@{/recipes/{id}/delete(id=${recipe.id})}" method="post" onsubmit="return confirm('本当に削除しますか？')">
                     <button>削除</button>
                 </form>
             </td>
         </tr>
     </table>
     <a href="/recipes/add">新規レシピ作成</a>
+    
+    <table border="1">
+        <form action="/recipe/comment" method="post">
+           <tr>
+               <th>
+                   番号
+               </th>
+               <td>
+                   <input type="text" name="id">
+               </td>
+           </tr>
+            <tr>
+                <th>名前</th>
+                <td>
+                    <input type="text" name="name">
+                </td>
+            </tr>
+            <tr>
+                <th>コメント</th>
+                <td>
+                    <textarea name="comment"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    
+                </th>
+                <td>
+                    <button>送信</button>
+                </td>
+            </tr>
+        </form>
+    </table>
+    <hr>
+    <footer th:replace="recipesFooter"></footer>
 
 </body>
 </html>

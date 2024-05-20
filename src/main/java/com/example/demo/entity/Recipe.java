@@ -13,8 +13,8 @@ public class Recipe {
 	private Integer id;
 	@Column(name="category_id")
 	private Integer categoryId;
-	@Column(name="user_id")
-	private Integer userId;
+	@Column(name="user_name")
+	private String userName;
 	@Column(name="recipe_name")
 	private String name;
 	private String materials;
@@ -22,22 +22,22 @@ public class Recipe {
 	public Recipe() {};
 	
 	
-	public Recipe(Integer categoryId, Integer userId, String name, String materials, String contents) {
+	public Recipe(Integer categoryId, String userName, String name, String materials, String contents) {
 		super();
 		this.categoryId = categoryId;
-		this.userId = userId;
+		this.userName = userName;
 		this.name = name;
 		this.materials = materials;
 		this.contents = contents;
 	}
 
 
-	public Recipe(Integer id, Integer categoryId, Integer userId, String name, String materials,
+	public Recipe(Integer id, Integer categoryId, String userName, String name, String materials,
 			String contents) {
 		super();
 		this.id = id;
 		this.categoryId = categoryId;
-		this.userId = userId;
+		this.userName = userName;
 		this.name = name;
 		this.materials = materials;
 		this.contents = contents;
@@ -48,8 +48,8 @@ public class Recipe {
 	public Integer getCategoryId() {
 		return categoryId;
 	}
-	public Integer getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
 	public String getName() {
 		return name;
@@ -60,8 +60,4 @@ public class Recipe {
 	public String getContents() {
 		return contents;
 	}
-	
-	
-	
-
 }
