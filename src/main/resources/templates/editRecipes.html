@@ -7,10 +7,14 @@
 </head>
 <body>
     <header th:replace="header"></header>
-    <h2>新規レシピ作成</h2>
+    <h2>レシピ編集</h2>
    
      <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="post">
           <table border="1">
+              <tr>
+                  <th></th>
+                  <th>すべて入力して下さい</th>
+              </tr>
             <tr>
                 <th>カテゴリー</th>
                 <td>                    
@@ -34,7 +38,7 @@
             <tr>
                 <th>材料</th>
                 <td>
-                    <input type="text" name="materials"th:value="${recipe.material}">
+                    <textarea name="material">[[${recipe.material}]]</textarea>
                 </td>
             </tr>
             <tr>
@@ -46,5 +50,7 @@
             </table>
             <button>更新</button>
          </form>
+         <hr>
+         <footer th:replace="fooder"></footer>
 </body>
 </html>

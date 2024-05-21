@@ -6,12 +6,19 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <h1>ユーザー新規登録</h1>
-    <form action="/login/created" method="post">
-        <input type="text" name="name" placeholder="名前"><br>
-        <input type="text" name="password" placeholder="パスワード"><br>
-        <button>登録</button>
-    </form> 
+    <header th:replace="headerLogin"></header>
+     <br>
+    <div class="container" align="center";>
+        <h2>ユーザー新規登録</h2>
+        [[${message}]]
+        <form action="/login/created" method="post">
+            ユーザー名　<input type="text" name="name" placeholder="名前"><br>
+            <br>
+            パスワード　<input type="text" name="password" placeholder="パスワード"><br>
+            <br>
+            <button>登録</button>
+        </form>
+   
     
 </body>
 </html>

@@ -6,13 +6,16 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+    <header th:replace="header"></header>
     <h2>新規レシピ作成</h2>
-    [[${error1}]]<br>
-    [[${error2}]]<br>
-    [[${error3}]]<br>
+    <font color="red">[[${error}]]</font>
    
      <form action="/recipes/add" method="post">
           <table border="1">
+            <tr>
+                  <th></th>
+                  <th>すべて入力して下さい</th>
+              </tr>
             <tr>
                 <th>カテゴリー</th>
                 <td>
@@ -36,7 +39,7 @@
             <tr>
                 <th>材料</th>
                 <td>
-                    <input type="text" name="material">
+                    <textarea type="text" name="material"></textarea>
                 </td>
             </tr>
             <tr>
@@ -45,8 +48,16 @@
                     <textarea name="content"></textarea>
                 </td>
             </tr>
-            </table>
-            <button>追加</button>
+            <tr>
+                <th>
+                </th>
+                <td>
+                   <button>追加</button> 
+                </td>
+            </tr>
+            </table>  
          </form>
+         <hr>
+          <footer th:replace="fooder"></footer>
 </body>
 </html>

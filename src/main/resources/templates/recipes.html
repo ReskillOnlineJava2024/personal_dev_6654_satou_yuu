@@ -7,8 +7,6 @@
 </head>
 <body>
     <header th:replace="header"></header>
-    <hr>
-    <p>こんにちは[[${name}]]さん</p>
     <form action="/recipes" method="get">
         <select size="1" name="categoryId">
             <option value="">全レシピ</option>
@@ -27,6 +25,8 @@
         <input type="text" name="keyword" placeholder="キーワード">
         <button>検索</button>
     </form>
+    <a href="/recipes/add">新規レシピ作成</a>
+    <br>
     <table border="1">
         <tr>
             <th>NO</th>
@@ -53,10 +53,14 @@
             </td>
         </tr>
     </table>
-    <a href="/recipes/add">新規レシピ作成</a>
     
+    <br>
     <table border="1">
         <form action="/recipe/comment" method="post">
+            <tr>
+                <th></th>
+                <th>新規コメント追加</th>
+            </tr>
            <tr>
                <th>
                    番号

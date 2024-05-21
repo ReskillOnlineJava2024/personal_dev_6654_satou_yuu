@@ -7,11 +7,10 @@
 </head>
 <body>
     <header th:replace="header"></header>
-    <hr>
     <table border="1">
         <tr>
             <th> </th>
-            <th> </th>
+            <th>詳細 </th>
         </tr>
        <tr>
            <th>料理名</th>
@@ -43,7 +42,7 @@
            <td>[[${recipe.contents}]]</td>
        </tr>
     </table>
-   
+   <br>
    <table>
        <tr>
            <th>名前</th>
@@ -54,6 +53,7 @@
            <td th:text="${review.comments}"></td>
        </tr>
    </table>
+   
     
     <hr>
     <footer th:replace="fooder"></footer>

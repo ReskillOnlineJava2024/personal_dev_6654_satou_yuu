@@ -6,15 +6,24 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <h1>ログイン</h1>
-    [[${message}]]
-    
-    <form action="/login" method="post">
-        <input type="text" name="name" placeholder="名前"><br>
-        <input type="text" name="password" placeholder="パスワード"><br>
-        <input type="submit" value="ログイン">
-    </form> 
-    <a href="/login/add">新規登録</a>
+     <header th:replace="headerLogin"></header>
+     <br>
+    <div class="container" align="center";>
+        <h2>ログイン</h2>
+        [[${message}]]
+        <form action="/login" method="post">
+            ユーザー名　<input type="text" name="name" placeholder="名前"><br>
+            <br>
+            パスワード　<input type="text" name="password" placeholder="パスワード"><br>
+            <br>
+            <input type="submit" value="ログイン"class="button">
+        </form>  
+        <br>
+         <a href="/login/add">新規登録</a>
+    </div>
+    <br>
+   
+   
 
 </body>
 </html>

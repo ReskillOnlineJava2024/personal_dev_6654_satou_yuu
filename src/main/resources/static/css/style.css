@@ -2,14 +2,19 @@
 body {
     background-color: #EFF0F7; /* 背景色  */
     text-align: center; /* 中央寄せ */
+    font-size:30px;
     min-width: 900px; /* 最小幅 */
 }
 /* ヘッダー、ナビゲーションメニュー、フッター */
-header, nav, footer {
+header, nav {
     background-color: #45496a; /* 背景色 */
     color: #ffffff; /* 文字色 */
     padding-top: 5px; /* 内側余白(上) */
     padding-bottom: 5px; /* 内側余白(下) */
+}
+
+footer{
+    background-color:rgb(192, 192, 192);
 }
 /* ヘッダー、ナビゲーション内リンク */
 header a, nav a {
@@ -17,8 +22,22 @@ header a, nav a {
 }
 /* ヘッダー内見出し */
 header h1 {
-    font-size: 20pt;
+    font-size: 40pt;
     margin: 10px auto;
+}
+
+input{
+    font-size:30px;
+}
+
+textarea{
+    font-size:25px;
+    width:700px;
+    height:300px;
+}
+
+select{
+    font-size:20px;
 }
 
 /* 仕切り線 */
@@ -42,31 +61,69 @@ table, th, td {
 /* 表 */
 table {
     margin: 5px auto;
-    min-width: 1000px;
+    width: 1000px;
 }
 /* 表見出しセル */
 table th {
-    background: #7d8bae;
+    background: #99ccff;
     color: #ffffff;
 }
-/* 送信ボタン */
-button {
+
+table td{
+    font-size:25px;
+}
+button{
     margin: 2px;
     padding: 5px 20px;
     background-color: rgb(0, 0, 255);
     color: #ffffff;
     border: none;
     width:150px;
+    height:50px;
     cursor: pointer;
     box-shadow:#666666;
+    font-size:20px;
+    box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
 }
+/* 送信ボタン */
+.button {
+    margin: 2px;
+    padding: 5px 20px;
+    background-color: rgb(0, 0, 255);
+    color: #ffffff;
+    border: none;
+    width:200px;
+    height:50px;
+    cursor: pointer;
+    box-shadow:#666666;
+    font-size:20px;
+     box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
+}
+.container {
+  width: 700px;
+  height:500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 /* 送信ボタン(マウスオーバー時) */
 button:hover {
     background-color: #6666ff;
+     box-shadow    : none;  /* 影の設定 */
 }
+.button:hover{
+    background-color: #6666ff;
+     box-shadow    : none;  /* 影の設定 */
+}
+
 /* エラーメッセージ */
 ul.error {
     color: red;
     list-style: none;
     padding-left: 0;
+    
 }
+
