@@ -6,7 +6,20 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <header th:replace="header"></header>
+<article>
+    <div class="side">
+        <h1>みんなのレシピ</h1>
+        <hr>
+        
+       
+        <hr>
+        
+    </div>
+    <div class="content">
+        <div class="head">
+             ユーザー：[[${name}]]<br>
+             <a href="/logout">ログアウト</a>
+        </div>
     <table border="1">
         <tr>
             <th> </th>
@@ -14,7 +27,7 @@
         </tr>
        <tr>
            <th>料理名</th>
-           <td>[[${recipe.name}]]</td>
+           <td class="td-comment">[[${recipe.name}]]</td>
        </tr>
        <tr>
            <th>作成者</th>
@@ -48,15 +61,20 @@
            <th>名前</th>
            <th>コメント</th>
        </tr>
+       
        <tr th:each="review:${reviews}">
            <td th:text="${review.name}"></td>
            <td th:text="${review.comments}"></td>
        </tr>
    </table>
-   
+   <a href="/recipes">戻る</a>
     
-    <hr>
-    <footer th:replace="fooder"></footer>
+    </div>
+    
+    
+</article>
+
+ 
 
 </body>
 </html>

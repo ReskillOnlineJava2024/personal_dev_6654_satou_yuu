@@ -6,9 +6,21 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <header th:replace="header"></header>
+    <article>
+    <div class="side">
+        <h1>みんなのレシピ</h1>
+        <hr>
+         <font color="red">[[${error}]]</font>
+       
+        <hr>
+    </div>
+    <div class="content">
+        <div class="head">
+             ユーザー：[[${name}]]<br>
+             <a href="/logout">ログアウト</a>
+        </div>
     <h2>新規レシピ作成</h2>
-    <font color="red">[[${error}]]</font>
+   
    
      <form action="/recipes/add" method="post">
           <table border="1">
@@ -57,7 +69,8 @@
             </tr>
             </table>  
          </form>
-         <hr>
-          <footer th:replace="fooder"></footer>
+         <a href="/recipes">戻る</a>
+</article>
+    
 </body>
 </html>

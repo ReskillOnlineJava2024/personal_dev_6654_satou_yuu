@@ -6,8 +6,16 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <header th:replace="header"></header>
-    <form action="/recipes" method="get">
+<article>
+    <div class="side">
+        <h1>みんなのレシピ</h1>
+        
+        <hr>
+         <font color="red">[[${error}]]</font>
+         [[${message}]]
+        <hr>
+        カテゴリー検索
+        <form action="/recipes" method="get">
         <select size="1" name="categoryId">
             <option value="">全レシピ</option>
             <option value="1">和食</option>
@@ -19,14 +27,30 @@
             <option value="7">その他</option>
         </select>
         <button>検索</button>
-    </form>
-   
+        <hr>
+        キーワード検索
     <form action="/recipes" method="get">
-        <input type="text" name="keyword" placeholder="キーワード">
+        <input type="text" name="keyword"  class="comm"placeholder="キーワード">
         <button>検索</button>
     </form>
-    <a href="/recipes/add">新規レシピ作成</a>
-    <br>
+     <hr>
+     コメント
+      <form action="/recipe/comment" method="post">
+          <input type="text" name="id" class="comm" placeholder="レシピ番号">
+          <input type="text" name="name" class="comm" placeholder="投稿者名">
+          <textarea name="comment" class="comment" placeholder="コメント"></textarea>
+          <button>送信</button>
+      </form>
+      
+      <hr>
+       </div>
+       
+    <div class="content">
+        <div class="head">
+             ユーザー：[[${name}]]<br>
+             <a href="/logout">ログアウト</a>
+        </div>
+    レシピ一覧
     <table border="1">
         <tr>
             <th>NO</th>
@@ -47,52 +71,22 @@
                 </form>
             </td>
             <td>
-                <form th:action="@{/recipes/{id}/delete(id=${recipe.id})}" method="post" onsubmit="return confirm('本当に削除しますか？')">
+                <form th:action="@{/recipes/{id}/delete(id=${recipe.id})}" method="post">
                     <button>削除</button>
                 </form>
             </td>
         </tr>
     </table>
+    <a href="/recipes/add">新規レシピ作成</a>
+    
+   
+    
     
     <br>
-    <table border="1">
-        <form action="/recipe/comment" method="post">
-            <tr>
-                <th></th>
-                <th>新規コメント追加</th>
-            </tr>
-           <tr>
-               <th>
-                   番号
-               </th>
-               <td>
-                   <input type="text" name="id">
-               </td>
-           </tr>
-            <tr>
-                <th>名前</th>
-                <td>
-                    <input type="text" name="name">
-                </td>
-            </tr>
-            <tr>
-                <th>コメント</th>
-                <td>
-                    <textarea name="comment"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    
-                </th>
-                <td>
-                    <button>送信</button>
-                </td>
-            </tr>
-        </form>
-    </table>
-    <hr>
-    <footer th:replace="recipesFooter"></footer>
-
+    
+    </div>
+    
+  
+</article>
 </body>
 </html>

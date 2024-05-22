@@ -1,16 +1,21 @@
 /* 全体 */
 body {
-    background-color: #EFF0F7; /* 背景色  */
+    background-color: #ffffff; /* 背景色  */
     text-align: center; /* 中央寄せ */
     font-size:30px;
     min-width: 900px; /* 最小幅 */
 }
 /* ヘッダー、ナビゲーションメニュー、フッター */
 header, nav {
-    background-color: #45496a; /* 背景色 */
-    color: #ffffff; /* 文字色 */
+    background-color: #EFF0F7; /* 背景色 */
+    color: #000000; /* 文字色 */
     padding-top: 5px; /* 内側余白(上) */
     padding-bottom: 5px; /* 内側余白(下) */
+    margin-bottom:50px;
+}
+
+h1{
+    color:#ffffff;
 }
 
 footer{
@@ -42,7 +47,7 @@ select{
 
 /* 仕切り線 */
 hr {
-    border-top: 2px dashed #7d8bae;
+    border-top: 2px dashed #ffffff;
 }
 td{
  background-color:#ffffff;  
@@ -75,7 +80,7 @@ table td{
 button{
     margin: 2px;
     padding: 5px 20px;
-    background-color: rgb(0, 0, 255);
+    background-color: rgb(23, 128, 232);
     color: #ffffff;
     border: none;
     width:150px;
@@ -89,7 +94,7 @@ button{
 .button {
     margin: 2px;
     padding: 5px 20px;
-    background-color: rgb(0, 0, 255);
+    background-color: rgb(23, 128, 232);
     color: #ffffff;
     border: none;
     width:200px;
@@ -104,18 +109,18 @@ button{
   height:500px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #ffffff;
+    background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 /* 送信ボタン(マウスオーバー時) */
 button:hover {
-    background-color: #6666ff;
+    background-color: rgb(114, 175, 243);
      box-shadow    : none;  /* 影の設定 */
 }
 .button:hover{
-    background-color: #6666ff;
+     background-color: rgb(114, 175, 243);
      box-shadow    : none;  /* 影の設定 */
 }
 
@@ -127,3 +132,69 @@ ul.error {
     
 }
 
+.side{
+    background-color: #45496a;
+    width:450px;
+    min-height:1200px;
+    color:#ffffff;
+/*    margin-left:10px;*/
+}
+
+.content{
+    width:1200px;
+    min-height:1200px;
+    text-align:center;
+    margin-left:50px;
+     background-color: #EFF0F7;
+}
+
+article{
+    display:flex;
+}
+
+.side.table{
+    width:100px;
+}
+
+.comment{
+    width:100px;
+    font-size:20px;
+     background-color: rgb(158, 158, 158);
+}
+
+
+.inputcomment{
+    font-size:20px;
+}
+
+.head{
+     background-color:rgb(192, 192, 192);
+    font-size:30px;
+    border:1px;
+    padding:10px;
+    margin-bottom:50px;
+    text-align:left;
+}
+
+.foot{
+     background-color:rgb(192, 192, 192);
+    font-size:30px;
+    border:1px;
+    padding:10px;
+    margin-bottom:50px;
+    text-align:right;
+}
+
+.comm{
+    width:300px;
+    font-size:20px;
+}
+.comment{ 
+    width:300px;
+    height:200px;
+    background-color:#ffffff;
+}
+
+.left{
+    text-align:left;
+}

@@ -6,8 +6,15 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-     <header th:replace="headerLogin"></header>
-     <br>
+   <article>
+    <div class="side">
+        <h1>みんなのレシピ</h1>
+        <hr>
+         <font color="red">[[${error}]]</font>
+       
+        <hr>
+    </div>
+    <div class="content">
     <div class="container" align="center";>
         <h2>ログイン</h2>
         [[${message}]]
@@ -19,9 +26,10 @@
             <input type="submit" value="ログイン"class="button">
         </form>  
         <br>
-         <a href="/login/add">新規登録</a>
+         <a href="/user/add">新規登録</a>
     </div>
-    <br>
+    </div>
+    </article>
    
    
 

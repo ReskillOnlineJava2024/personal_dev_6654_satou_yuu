@@ -41,11 +41,7 @@ public class UserController {
 		}
 		List<User> userList=userRepository.findByNameAndPassword(name,password);
 		if(userList==null||userList.size()==0) {
-			model.addAttribute("message","メールアドレスとパスワードが一致しません");
-			return "login";
-		}
-		if(name.length()==0||password.length()==0) {
-			model.addAttribute("message","メールアドレスとパスワードを入力して下さい");
+			model.addAttribute("error","メールアドレスとパスワードが一致しません");
 			return "login";
 		}
 		User user=userList.get(0);
@@ -55,22 +51,25 @@ public class UserController {
 	}
 	
 	//新規登録の表示
-	@GetMapping("/login/add")
+	@GetMapping("/user/add")
 	public String add() {
 		return "createUser";
 	}
 	
 	//新規登録処理
-	@PostMapping("login/created")
+	@PostMapping("user/add")
 	public String create(
 			@RequestParam(name="name",defaultValue="")String name,
 			@RequestParam(name="password",defaultValue="")String password,
 			Model model) {
-		
+		if(name.length()==0||password.length()==0) {
+			model.addAttribute("error","メールアドレスとパスワードを入力して下さい");
+			return "createUser";
+		}
 		User user=new User(name,password);
 		userRepository.save(user);
 		model.addAttribute("message","登録しました");
-		return "confirm";
+		return "successCreate";
 	}
 	
 

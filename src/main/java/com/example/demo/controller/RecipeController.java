@@ -93,10 +93,7 @@ public class RecipeController {
 		}else {
 			recipeRepository.save(recipe);
 			return "redirect:/recipes";
-		}
-		
-		
-		
+		}	
 	}
 	
 	//編集
@@ -107,9 +104,17 @@ public class RecipeController {
 		List<Category> categoryList=categoryRepository.findAll();
 		model.addAttribute("categories",categoryList);
 		Recipe recipe=recipeRepository.findById(id).get();
-		model.addAttribute("recipe",recipe);
 		model.addAttribute("name",account.getName());
-		return "editRecipes";
+		if(account.getName().equals(recipe.getUserName())) {
+			model.addAttribute("recipe",recipe);
+			return "editRecipes";
+		}else {
+			List<Recipe> recipeList=recipeRepository.findAll();
+			model.addAttribute("recipes",recipeList);
+			model.addAttribute("error","エラー：編集権限はありません");
+			return "recipes";
+		}
+		
 	}
 	
 	//編集の送信
@@ -124,8 +129,11 @@ public class RecipeController {
 		Recipe recipe=new Recipe(id,categoryId,account.getName(),name,material,content);
 		recipeRepository.save(recipe);
 		model.addAttribute("name",account.getName());
-		
-		return "redirect:/recipes";
+		List<Recipe> recipeList=recipeRepository.findAll();
+		model.addAttribute("recipes",recipeList);
+
+		model.addAttribute("message","編集を送信しました");
+		return "recipes";
 	}
 	
 	//削除
@@ -133,9 +141,19 @@ public class RecipeController {
 	public String delete(
 			@PathVariable("id") Integer id,
 			Model model) {
-		recipeRepository.deleteById(id);
 		model.addAttribute("name",account.getName());
-		return "redirect:/recipes";
+		Recipe recipe=recipeRepository.findById(id).get();
+		model.addAttribute("name",account.getName());
+		if(account.getName().equals(recipe.getUserName())) {
+			model.addAttribute("message","削除しました");
+			recipeRepository.deleteById(id);
+		}else {
+			model.addAttribute("error","エラー：権限はありません");
+		}
+		List<Recipe> recipeList=recipeRepository.findAll();
+		model.addAttribute("recipes",recipeList);
+		return "recipes";
+		
 	}
 	
 	//詳細の表示
@@ -155,15 +173,21 @@ public class RecipeController {
 	//コメントの送信
 		@PostMapping("/recipe/comment")
 		public String comment(
-				@RequestParam(name="id", defaultValue="") Integer id,
+				@RequestParam(name="id", defaultValue="0") Integer id,
 				@RequestParam(name="name", defaultValue="")String name,
 				@RequestParam(name="comment", defaultValue="")String comment,
 				Model model) {
-			
-			Review review=new Review(id,name,comment);
-			reviewRepository.save(review);
+			if(id==0||name.length()==0||comment.length()==0) {
+				model.addAttribute("error","コメント：すべて入力して下さい");
+			}else {
+				model.addAttribute("message","コメント：送信されました");
+				Review review=new Review(id,name,comment);
+				reviewRepository.save(review);
+			}
+			List<Recipe> recipeList=recipeRepository.findAll();
+			model.addAttribute("recipes",recipeList);
 			model.addAttribute("name",account.getName());
-			return "redirect:/recipes";
+			return "recipes";
 		}
 	
 
