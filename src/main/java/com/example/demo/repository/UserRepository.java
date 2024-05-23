@@ -8,4 +8,5 @@ import com.example.demo.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	List<User> findByNameAndPassword(String name, String password);
+	List<User> findByName(String name);
 }

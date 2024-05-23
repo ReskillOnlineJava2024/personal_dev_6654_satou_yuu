@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>レシピ編集</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -14,11 +14,11 @@
        
         <hr>
     </div>
-    <div class="content">
+    <<div class="content">
         <div class="head">
-             ユーザー：[[${name}]]<br>
+             ユーザー：
+             <a href="/recipes/parsonal">[[${name}]]</a><br>
              <a href="/logout">ログアウト</a>
-             
         </div>
     <h2>レシピ編集</h2>
    
@@ -63,7 +63,7 @@
             </table>
             <button>更新</button>
          </form>
-         <a href="/recipes">戻る</a>
+         <a href="/recipes/parsonal">戻る</a>
 </article>
     
 </body>

@@ -62,10 +62,20 @@ public class UserController {
 			@RequestParam(name="name",defaultValue="")String name,
 			@RequestParam(name="password",defaultValue="")String password,
 			Model model) {
+		List<User> users=userRepository.findByName(name);
 		if(name.length()==0||password.length()==0) {
 			model.addAttribute("error","メールアドレスとパスワードを入力して下さい");
 			return "createUser";
 		}
+		if(name.length()>20||password.length()>20) {
+			model.addAttribute("error","正しい文字数で入力して下さい");
+			return "createUser";
+		}
+		if(users.size()!=0) {
+			model.addAttribute("error","この名前は使用済みです");
+			return "createUser";
+		}
+		
 		User user=new User(name,password);
 		userRepository.save(user);
 		model.addAttribute("message","登録しました");

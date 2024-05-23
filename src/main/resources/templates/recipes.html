@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>レシピ一覧</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -13,6 +13,9 @@
         <hr>
          <font color="red">[[${error}]]</font>
          [[${message}]]
+        <hr>
+        
+        <a href="/recipes/add" class="link">新規レシピ作成</a>
         <hr>
         カテゴリー検索
         <form action="/recipes" method="get">
@@ -34,20 +37,19 @@
         <button>検索</button>
     </form>
      <hr>
-     コメント
-      <form action="/recipe/comment" method="post">
-          <input type="text" name="id" class="comm" placeholder="レシピ番号">
-          <input type="text" name="name" class="comm" placeholder="投稿者名">
-          <textarea name="comment" class="comment" placeholder="コメント"></textarea>
-          <button>送信</button>
-      </form>
+     作成者検索
+      <form action="/recipes" method="get">
+        <input type="text" name="creater"  class="comm"placeholder="作成者名">
+        <button>検索</button>
+    </form>
       
       <hr>
        </div>
        
     <div class="content">
         <div class="head">
-             ユーザー：[[${name}]]<br>
+             ユーザー：
+             <a href="/recipes/parsonal">[[${name}]]</a><br>
              <a href="/logout">ログアウト</a>
         </div>
     レシピ一覧
@@ -56,8 +58,7 @@
             <th>NO</th>
             <th>料理名</th>
             <th>作成者</th>
-            <th>編集</th>
-            <th>削除</th>
+            <th>コメント</th>
         </tr>
         <tr th:each="recipe:${recipes}">
             <td th:text="${recipe.id}"></td>
@@ -66,27 +67,13 @@
             </td>
             <td th:text="${recipe.userName}"></td>
             <td>
-                <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="get">
-                    <button href="/add">更新</button>
-                </form>
-            </td>
-            <td>
-                <form th:action="@{/recipes/{id}/delete(id=${recipe.id})}" method="post">
-                    <button>削除</button>
+                <form th:action="@{/recipe/{id}/comment(id=${recipe.id})}" method="get">
+                    <button href="/add">コメント</button>
                 </form>
             </td>
         </tr>
     </table>
-    <a href="/recipes/add">新規レシピ作成</a>
-    
-   
-    
-    
-    <br>
-    
     </div>
-    
-  
 </article>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>新規レシピ作成</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -11,12 +11,12 @@
         <h1>みんなのレシピ</h1>
         <hr>
          <font color="red">[[${error}]]</font>
-       
         <hr>
     </div>
     <div class="content">
         <div class="head">
-             ユーザー：[[${name}]]<br>
+             ユーザー：
+             <a href="/recipes/parsonal">[[${name}]]</a><br>
              <a href="/logout">ログアウト</a>
         </div>
     <h2>新規レシピ作成</h2>
@@ -45,19 +45,19 @@
             <tr>
                 <th>料理名</th>
                 <td>
-                    <input type="text" name="name">
+                    <input type="text" name="name" placeholder="20文字以内">
                 </td>
             </tr>
             <tr>
                 <th>材料</th>
                 <td>
-                    <textarea type="text" name="material"></textarea>
+                    <textarea type="text" name="material" placeholder="200文字以内"></textarea>
                 </td>
             </tr>
             <tr>
                 <th>作り方</th>
                 <td>
-                    <textarea name="content"></textarea>
+                    <textarea name="content" placeholder="500文字以内"></textarea>
                 </td>
             </tr>
             <tr>

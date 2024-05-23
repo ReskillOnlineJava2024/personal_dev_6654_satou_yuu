@@ -38,20 +38,24 @@ public class RecipeController {
 	public String index(
 			@RequestParam(name="categoryId",defaultValue="")Integer categoryId,
 			@RequestParam(name="keyword", defaultValue="")String keyword,
+			@RequestParam(name="creater", defaultValue="")String creater,
 			Model model) {
 		List<Category> categoryList=categoryRepository.findAll();
-		model.addAttribute("categories",categoryList);
-		model.addAttribute("name",account.getName());
 		List<Recipe> recipeList=null;
 		
 		if(categoryId!=null) {
 			recipeList=recipeRepository.findByCategoryId(categoryId);
 		}else if(keyword.length()>0){
 			recipeList=recipeRepository.findByNameContaining(keyword);
+		}else if(creater.length()>0){
+			recipeList=recipeRepository.findByUserName(creater);
 		}else {
 			recipeList=recipeRepository.findAll();
 		}
+		
+		model.addAttribute("categories",categoryList);
 		model.addAttribute("recipes",recipeList);
+		model.addAttribute("name",account.getName());
 		return "recipes";
 	}
 	
@@ -75,26 +79,34 @@ public class RecipeController {
 			) {
 		boolean check=true;
 		
+		String error="";
 		Recipe recipe=new Recipe(categoryId,account.getName(),name,material,content);
 		model.addAttribute("name",account.getName());
-		if(name.length()==0) {
+		if(name.length()==0||material.length()==0||content.length()==0) {
 			check=false;
-		}
-		if(material.length()==0) {
+			error="すべて入力して下さい";
+		}else if(name.length()>20||material.length()>200||content.length()>500) {
 			check=false;
-		}
-		if(content.length()==0) {
-			check=false;
+			error="正しい文字数で入力して下さい";
 		}
 		
 		if(check==false) {
-			model.addAttribute("error","全ての項目を入力して下さい");
+			model.addAttribute("error",error);
 			return "createRecipe";
 		}else {
 			recipeRepository.save(recipe);
 			return "redirect:/recipes";
 		}	
 	}
+	//個人レシピの確認
+		@GetMapping("/recipes/parsonal")
+		public String personal(Model model) {
+			List<Recipe> recipeList=recipeRepository.findByUserName(account.getName());
+			model.addAttribute("recipes",recipeList);
+			model.addAttribute("name",account.getName());
+			return "parsonalRecipes";
+		}
+		
 	
 	//編集
 	@GetMapping("/recipes/{id}/edit")
@@ -126,14 +138,15 @@ public class RecipeController {
 			@RequestParam(name="material", defaultValue="")String material,
 			@RequestParam(name="content", defaultValue="")String content,
 			Model model) {
-		Recipe recipe=new Recipe(id,categoryId,account.getName(),name,material,content);
-		recipeRepository.save(recipe);
+		Recipe newrecipe=new Recipe(id,categoryId,account.getName(),name,material,content);
+		recipeRepository.save(newrecipe);
 		model.addAttribute("name",account.getName());
-		List<Recipe> recipeList=recipeRepository.findAll();
+		List<Recipe> recipeList=recipeRepository.findByUserName(account.getName());
 		model.addAttribute("recipes",recipeList);
-
+		Recipe recipe=recipeRepository.findById(id).orElse(null);
+		model.addAttribute("recipe",recipe);
 		model.addAttribute("message","編集を送信しました");
-		return "recipes";
+		return "parsonalRecipes";
 	}
 	
 	//削除
@@ -141,17 +154,12 @@ public class RecipeController {
 	public String delete(
 			@PathVariable("id") Integer id,
 			Model model) {
-		model.addAttribute("name",account.getName());
-		Recipe recipe=recipeRepository.findById(id).get();
-		model.addAttribute("name",account.getName());
-		if(account.getName().equals(recipe.getUserName())) {
-			model.addAttribute("message","削除しました");
-			recipeRepository.deleteById(id);
-		}else {
-			model.addAttribute("error","エラー：権限はありません");
-		}
-		List<Recipe> recipeList=recipeRepository.findAll();
+		
+		recipeRepository.deleteById(id);
+		List<Recipe> recipeList=recipeRepository.findByUserName(account.getName());
 		model.addAttribute("recipes",recipeList);
+		model.addAttribute("name",account.getName());
+		model.addAttribute("message","削除しました");
 		return "recipes";
 		
 	}
@@ -170,15 +178,30 @@ public class RecipeController {
 		return "showRecipe";
 	}
 	
+	//コメントフォーム
+	@GetMapping("/recipe/{id}/comment")
+	public String review(
+			@PathVariable("id") Integer id,
+			Model model) {
+		List<Category> categoryList=categoryRepository.findAll();
+		model.addAttribute("categories",categoryList);
+		Recipe recipe=recipeRepository.findById(id).get();
+		model.addAttribute("name",account.getName());
+		model.addAttribute("recipe",recipe);
+		return "review";
+		
+	}
 	//コメントの送信
-		@PostMapping("/recipe/comment")
+		@PostMapping("/recipe/{id}/comment")
 		public String comment(
-				@RequestParam(name="id", defaultValue="0") Integer id,
+				@PathVariable("id") Integer id,
 				@RequestParam(name="name", defaultValue="")String name,
 				@RequestParam(name="comment", defaultValue="")String comment,
 				Model model) {
 			if(id==0||name.length()==0||comment.length()==0) {
 				model.addAttribute("error","コメント：すべて入力して下さい");
+			}else if(name.length()>20||comment.length()>500) {
+				model.addAttribute("error","コメント：正しい文字数で入力して下さい");
 			}else {
 				model.addAttribute("message","コメント：送信されました");
 				Review review=new Review(id,name,comment);
@@ -187,8 +210,8 @@ public class RecipeController {
 			List<Recipe> recipeList=recipeRepository.findAll();
 			model.addAttribute("recipes",recipeList);
 			model.addAttribute("name",account.getName());
-			return "recipes";
+			return "redirect:/recipes";
 		}
-	
-
+		
+		
 }

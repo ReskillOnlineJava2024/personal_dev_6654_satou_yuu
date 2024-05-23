@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>登録完了</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -10,25 +10,18 @@
     <div class="side">
         <h1>みんなのレシピ</h1>
         <hr>
-         <font color="red">[[${error}]]</font>
-       
+         <font color="red">[[${error}]]</font> 
         <hr>
     </div>
     <div class="content">
+        <br>
+        <br>
     <div class="container" align="center";>
         <h2>ようこそ！</h2>
         <p>アカウントが作成されました</p>
         <a href="/login">ログインする</a>
     </div>
     </div>
-    </article>
-    <header th:replace="headerLogin"></header>
-     <br>
-    <div class="container">
-        <h2>ようこそ！</h2>
-        <p>アカウントが作成されました</p>
-        <a href="/login">ログインする</a>
-    </div>
-    
+    </article>  
 </body>
 </html>

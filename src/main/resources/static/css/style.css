@@ -18,6 +18,11 @@ h1{
     color:#ffffff;
 }
 
+.log{
+    background-color: #45496a;
+    color:#ffffff;
+}
+
 footer{
     background-color:rgb(192, 192, 192);
 }
@@ -32,7 +37,8 @@ header h1 {
 }
 
 input{
-    font-size:30px;
+    font-size:25px;
+    width:400px;
 }
 
 textarea{
@@ -77,7 +83,22 @@ table th {
 table td{
     font-size:25px;
 }
+
+.link{
+    width:200px;
+    height:70px;
+    background-color: rgb(255, 128, 0);
+    color: #ffffff;
+    font-size:40px;
+    text-decoration: none;
+}
+
+.link:hover{
+    background-color: rgb(252, 177, 3);
+}
 button{
+    margin-top:50px;
+    margin-bottom:50px;
     margin: 2px;
     padding: 5px 20px;
     background-color: rgb(23, 128, 232);
@@ -92,6 +113,8 @@ button{
 }
 /* 送信ボタン */
 .button {
+    margin-top:50px;
+    margin-bottom:50px;
     margin: 2px;
     padding: 5px 20px;
     background-color: rgb(23, 128, 232);

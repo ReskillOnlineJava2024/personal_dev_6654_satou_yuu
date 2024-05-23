@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>あなたのレシピ</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<article>
+    <div class="side">
+        <h1>みんなのレシピ</h1>
+        <hr>
+        
+       
+        <hr>
+        
+    </div>
+    <div class="content">
+        <div class="head">
+             ユーザー：
+             <a href="/recipes/parsonal">[[${name}]]</a><br>
+             <a href="/logout">ログアウト</a>
+        </div>
+     あなたのレシピ一覧
+    <table border="1">
+        <tr>
+            <th>NO</th>
+            <th>料理名</th>
+            <th>作成者</th>
+            <th>編集</th>
+            <th>削除</th>
+        </tr>
+        <tr th:each="recipe:${recipes}">
+            <td th:text="${recipe.id}"></td>
+            <td th:text="${recipe.name}">
+            </td>
+            <td th:text="${recipe.userName}"></td>
+            <td>
+                <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="get">
+                    <button href="/add">更新</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/recipes/{id}/delete(id=${recipe.id})}" method="post" onsubmit="return confirm('本当に削除しますか？');">
+                    <button>削除</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+   <br>
+   <a href="/recipes">戻る</a>
+    
+    </div>
+    
+    
+</article>
+
+ 
+
+</body>
+</html>
