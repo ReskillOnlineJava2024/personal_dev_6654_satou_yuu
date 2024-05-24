@@ -25,7 +25,12 @@ public class UserController {
 	
 	//ログインの表示
 	@GetMapping({"/login","/logout"})
-	public String index() {
+	public String index(
+			@RequestParam(name="error", defaultValue="")String error,
+			Model model) {
+		if(error.equals("notLoggedIn")) {
+			model.addAttribute("error","ログインしてください");
+		}
 		return "login";
 	}
 	

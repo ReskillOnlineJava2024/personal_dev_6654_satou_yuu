@@ -160,15 +160,17 @@ ul.error {
     width:450px;
     min-height:1200px;
     color:#ffffff;
+     position:fixed;
 /*    margin-left:10px;*/
 }
 
 .content{
-    width:1200px;
+    width:1400px;
     min-height:1200px;
     text-align:center;
-    margin-left:50px;
-     background-color: #EFF0F7;
+    margin-left:500px;
+    background-color: #EFF0F7;
+   
 }
 
 article{
@@ -195,8 +197,11 @@ article{
     font-size:30px;
     border:1px;
     padding:10px;
-    margin-bottom:50px;
+    margin-bottom:120px;
     text-align:left;
+     position:fixed;
+     width:1400px;
+   
 }
 
 .foot{

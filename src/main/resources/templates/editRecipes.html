@@ -10,16 +10,22 @@
     <div class="side">
         <h1>みんなのレシピ</h1>
         <hr>
-        [[${message}]]
+        <font color="red">[[${error}]]</font>
+         [[${message}]]
        
         <hr>
     </div>
-    <<div class="content">
+    <div class="content">
         <div class="head">
              ユーザー：
              <a href="/recipes/parsonal">[[${name}]]</a><br>
              <a href="/logout">ログアウト</a>
         </div>
+         <br>
+        <br>
+        <br>
+        <br>
+        <br>
     <h2>レシピ編集</h2>
    
      <form th:action="@{/recipes/{id}/edit(id=${recipe.id})}" method="post">
@@ -57,7 +63,7 @@
             <tr>
                 <th>作り方</th>
                 <td>
-                    <textarea name="contents">[[${recipe.contents}]]</textarea>
+                    <textarea name="content">[[${recipe.contents}]]</textarea>
                 </td>
             </tr>
             </table>

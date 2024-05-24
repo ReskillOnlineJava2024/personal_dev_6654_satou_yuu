@@ -139,14 +139,31 @@ public class RecipeController {
 			@RequestParam(name="content", defaultValue="")String content,
 			Model model) {
 		Recipe newrecipe=new Recipe(id,categoryId,account.getName(),name,material,content);
-		recipeRepository.save(newrecipe);
+		boolean check=true;
+		String error="";
 		model.addAttribute("name",account.getName());
-		List<Recipe> recipeList=recipeRepository.findByUserName(account.getName());
-		model.addAttribute("recipes",recipeList);
-		Recipe recipe=recipeRepository.findById(id).orElse(null);
-		model.addAttribute("recipe",recipe);
-		model.addAttribute("message","編集を送信しました");
-		return "parsonalRecipes";
+		if(name.length()==0||material.length()==0||content.length()==0) {
+			check=false;
+			error="すべて入力して下さい";
+		}else if(name.length()>20||material.length()>200||content.length()>500) {
+			check=false;
+			error="正しい文字数で入力して下さい";
+		}
+		
+		if(check==false) {
+			Recipe recipe=recipeRepository.findById(id).orElse(null);
+			model.addAttribute("recipe",recipe);
+			model.addAttribute("error",error);
+			return "editRecipes";
+		}else {
+			recipeRepository.save(newrecipe);
+			List<Recipe> recipeList=recipeRepository.findByUserName(account.getName());
+			model.addAttribute("recipes",recipeList);
+			Recipe recipe=recipeRepository.findById(id).orElse(null);
+			model.addAttribute("recipe",recipe);
+			model.addAttribute("message","編集を送信しました");
+			return "parsonalRecipes";
+		}	
 	}
 	
 	//削除
@@ -160,7 +177,7 @@ public class RecipeController {
 		model.addAttribute("recipes",recipeList);
 		model.addAttribute("name",account.getName());
 		model.addAttribute("message","削除しました");
-		return "recipes";
+		return "parsonalRecipes";
 		
 	}
 	
@@ -210,7 +227,7 @@ public class RecipeController {
 			List<Recipe> recipeList=recipeRepository.findAll();
 			model.addAttribute("recipes",recipeList);
 			model.addAttribute("name",account.getName());
-			return "redirect:/recipes";
+			return "recipes";
 		}
 		
 		
